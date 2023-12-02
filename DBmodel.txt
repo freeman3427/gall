@@ -1,0 +1,5 @@
+id  게시판 고유번호
+title 글 이름
+content 글 내용
+create_date 글 작성일시
+
