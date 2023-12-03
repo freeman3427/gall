@@ -1,0 +1,9 @@
+{% if gall_list %}
+<ul>
+    {% for gallery in gall_list %}
+    <li><a href="{{ url_for('gallery.detail',id=gallery.id)}}">{{ gallery.title}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>글이 없습니다</p>
+{% endif %}
