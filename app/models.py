@@ -10,7 +10,7 @@ class Gallery(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    gall_id = db.Column(db.Integer, db.ForeginKey(
+    gall_id = db.Column(db.Integer, db.ForeignKey(
         'gallery.id', ondelete='CASCADE'))
     gall = db.relationship('Gallery', backref=db.backref('coment_set'))
     content = db.Column(db.Text, nullable=False)

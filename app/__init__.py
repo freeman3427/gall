@@ -21,6 +21,6 @@ def create_app():
     from .views import main_views, gall_views,comment_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(gall_views.bp)
-    app.register_buleprint(comment_views.bp)
+    app.register_blueprint(comment_views.bp)
 
     return app
