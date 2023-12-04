@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
-
 from app.models import Gallery
+from app.forms import GalleryForm
 
 bp = Blueprint('gallery', __name__, url_prefix='/gallery')
 
@@ -15,3 +15,9 @@ def _list():
 def detail(id):
     gallery = Gallery.query.get_or_404(id)
     return render_template('gallery/gall_content_detail.html', gallery=gallery)
+
+
+@bp.route('/create/')
+def create():
+    form = GalleryForm()
+    return render_template('gallery/gallery_form.html', form=form)

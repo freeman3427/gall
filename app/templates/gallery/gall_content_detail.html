@@ -1,10 +1,39 @@
-<h1>
-    {{gallery.title}}
-</h1>
-<div>
-    {{gallery.content}}
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <!--글 본문-->
+    <h2 class="border-bottom py-2">{{ gallery.title }}</h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ gallery.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge be-light text-dark p-2">
+                    {{ gallery.create_date}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--덧글 목록-->
+    <h5 class="border-bottom my-3 py-2">{{gallery.comment_set|length}}개의 덧글이 있습니다.</h5>
+    {% for comment in gallery.comment_set %}
+    <div class="card my-2">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ comment.content }}</div>
+            <div class="d-flex justify-content-end">
+                <div class="badge be-light text-dark p-1">
+                    {{comment.create_date}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!--덧글 등록-->
+    <form action="{{url_for('comment.create',id=gallery.id)}}" method="post" class="mb-3">
+        <div class="mb-3">
+            <textarea name="content" id="content" class="form-control" rows="5"></textarea>
+        </div>
+        <input type="submit" value="덧글작성">
+    </form>
 </div>
-<form action="{{url_for('comment.create',id=gallery.id)}}" method="post">
-    <textarea name="content" id="content" rows="15"></textarea>
-    <input type="submit" value="덧글작성">
-</form>
+{% endblock %}
