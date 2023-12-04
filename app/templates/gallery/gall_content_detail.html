@@ -4,7 +4,7 @@
 <div>
     {{gallery.content}}
 </div>
-<form action="{{url_for('coment.create',id=gallery.id)}}" method="post">
+<form action="{{url_for('comment.create',id=gallery.id)}}" method="post">
     <textarea name="content" id="content" rows="15"></textarea>
     <input type="submit" value="덧글작성">
 </form>

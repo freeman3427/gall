@@ -8,7 +8,7 @@ class Gallery(db.Model):
     create_date = db.Column(db.DateTime(), nullable=False)
 
 
-class Coment(db.Model):
+class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     gall_id = db.Column(db.Integer, db.ForeginKey(
         'gallery.id', ondelete='CASCADE'))
