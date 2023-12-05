@@ -1,4 +1,7 @@
-from flask import Blueprint, render_template
+from datetime import datetime
+from flask import Blueprint, render_template, request, url_for
+from werkzeug.utils import redirect
+from app import db
 from app.models import Gallery
 from app.forms import GalleryForm
 
@@ -17,7 +20,13 @@ def detail(id):
     return render_template('gallery/gall_content_detail.html', gallery=gallery)
 
 
-@bp.route('/create/')
+@bp.route('/create/', methods=('GET', 'POST'))
 def create():
     form = GalleryForm()
-    return render_template('gallery/gallery_form.html', form=form)
+    if request.method == 'POST' and form.validate_on_submit():
+        gallery = Gallery(title=form.title.data,
+                          content=form.content.data, create_date=datetime.now())
+        db.session.add(gallery)
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    return render_template('gallery/gall_form.html', form=form)
