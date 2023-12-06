@@ -8,7 +8,7 @@ from app.models import User
 
 bp=Blueprint('auth',__name__,url_prefix='/auth')
 
-@bp.route('/signup/',method=('GET','POST'))
+@bp.route('/signup/',methods=('GET','POST'))
 def signup():
     form=UserCreateForm()
     if request.method=='POST' and form.valiate_on_submit():
